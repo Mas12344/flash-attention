@@ -41,7 +41,7 @@ jobs:
       - name: Install CUDA Toolkit 12.6
         uses: Jimver/cuda-toolkit@v0.2.15
         with:
-          cuda: '12.6.0'
+          cuda: '12.5.0'
           method: 'network'
           sub-packages: '["nvcc", "cudart", "cublas", "cufft", "curand", "cusolver", "cusparse"]'
 
