@@ -14,6 +14,11 @@ jobs:
       DISTUTILS_USE_SDK: 1
 
     steps:
+      - name: Enable long paths in git
+        run: |
+          git config --global core.longpaths true
+      - name: Set up MSVC
+        uses: ilammy/msvc-dev-cmd@v1
       # --------------------------------------------------
       # Checkout TAG v2.8.3
       # --------------------------------------------------
