@@ -39,14 +39,13 @@ jobs:
       # CUDA Toolkit 12.6
       # --------------------------------------------------
       - name: Install CUDA Toolkit 12.6
-        uses: Jimver/cuda-toolkit@v0.2.15
+        uses: Jimver/cuda-toolkit@v0.2.29
+        id: cuda-toolkit
         with:
-          cuda: '12.5.0'
-          method: 'network'
-          sub-packages: '["nvcc", "cudart", "cublas", "cufft", "curand", "cusolver", "cusparse"]'
+          cuda: '12.6.0'
 
       - name: Verify CUDA
-        run: nvcc --version
+        run: nvcc -V
 
       # --------------------------------------------------
       # PyTorch cu126
