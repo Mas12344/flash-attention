@@ -73,44 +73,6 @@ jobs:
         run: |
           python setup.py bdist_wheel --dist-dir=dist
 
-      # --------------------------------------------------
-      # Rename wheel
-      # --------------------------------------------------
-      - name: Rename wheel
-        shell: cmd
-        run: |
-          @echo off
-          setlocal enabledelayedexpansion
-
-          for /f "delims=" %%i in ('
-            python -c "import torch; from packaging.version import parse; \
-            cxx11=str(torch._C._GLIBCXX_USE_CXX11_ABI).upper(); \
-            cuda=parse(torch.version.cuda); \
-            cuda_ver=''.join(map(str,cuda.release)); \
-            tv=parse(torch.__version__); \
-            torch_ver=''.join(map(str,tv.release)); \
-            print(f'cu{cuda_ver}torch{torch_ver}cxx11abi{cxx11}')"
-          ') do set wheel_filename=%%i
-
-          for %%f in (dist\*.whl) do (
-            set "filename=%%~nxf"
-            echo !filename! | findstr /c:+ >nul
-            if errorlevel 1 (
-              set count=0
-              for /l %%j in (0,1,1000) do (
-                if "!filename:~%%j,1!"=="-" set /a count+=1
-                if "!filename:~%%j,1!"=="-" if "!count!"=="2" (
-                  set "new_filename=!filename:~0,%%j!+!wheel_filename!!filename:~%%j!"
-                  echo Renaming !filename! to !new_filename!
-                  move "dist\!filename!" "dist\!new_filename!"
-                  goto :next
-                )
-              )
-            )
-            :next
-          )
-
-          endlocal
 
       # --------------------------------------------------
       # Upload artifact
