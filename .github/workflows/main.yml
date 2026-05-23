@@ -22,10 +22,10 @@ jobs:
       # --------------------------------------------------
       # Checkout TAG v2.8.3
       # --------------------------------------------------
-      - name: Checkout tag v2.8.3
+      - name: Checkout tag fa4-v4.0.0.beta14
         uses: actions/checkout@v4
         with:
-          ref: v2.8.3
+          ref: fa4-v4.0.0.beta14
           fetch-depth: 0
 
       # --------------------------------------------------
